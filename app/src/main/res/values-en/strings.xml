@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Saimin APP</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_switch">Switch mode</string>
+    <string name="menu_settings">Settings</string>
+</resources>
