@@ -12,14 +12,15 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.reedoverflow.saiminapp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_switch"
+        android:name="com.reedoverflow.saiminapp.ui.switchmode.SwitchFragment"
+        android:label="@string/menu_switch"
+        tools:layout="@layout/fragment_switch" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.reedoverflow.saiminapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_settings"
+        android:name="com.reedoverflow.saiminapp.ui.settings.SettingFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_setting" />
+
 </navigation>
