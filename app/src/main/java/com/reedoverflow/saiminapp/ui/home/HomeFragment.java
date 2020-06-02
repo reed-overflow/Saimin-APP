@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.reedoverflow.saiminapp.R;
+import com.reedoverflow.saiminapp.ui.home.basic.BaiscFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -23,13 +24,9 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_cont, BaiscFragment.newInstance()).commit();
+
         return root;
     }
 }

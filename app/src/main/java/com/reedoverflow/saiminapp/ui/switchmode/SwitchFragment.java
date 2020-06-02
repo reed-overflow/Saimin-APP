@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.reedoverflow.saiminapp.R;
 
+// TODO: 2020/6/2 切换界面 
 public class SwitchFragment extends Fragment {
 
     private SwitchViewModel mViewModel;

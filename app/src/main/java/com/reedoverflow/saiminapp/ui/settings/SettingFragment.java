@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.reedoverflow.saiminapp.R;
 
+// TODO: 2020/6/2 设置界面 
 public class SettingFragment extends Fragment {
 
     private SettingViewModel mViewModel;
