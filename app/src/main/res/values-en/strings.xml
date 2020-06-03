@@ -4,4 +4,13 @@
     <string name="menu_home">Home</string>
     <string name="menu_switch">Switch mode</string>
     <string name="menu_settings">Settings</string>
+
+    <string name="settings_author">Author info</string>
+
+    <string name="settings_repo">Repo link</string>
+
+    <string name="settings_license">License</string>
+    <string name="settings_license_detail">License info</string>
+
+    <string name="settings_version">Version</string>
 </resources>

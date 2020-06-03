@@ -1,39 +1,48 @@
 package com.reedoverflow.saiminapp.ui.settings;
 
-import androidx.lifecycle.ViewModelProviders;
-
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.reedoverflow.saiminapp.R;
 
+import de.psdev.licensesdialog.LicensesDialog;
+
 // TODO: 2020/6/2 设置界面 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends PreferenceFragmentCompat {
 
-    private SettingViewModel mViewModel;
-
-    public static SettingFragment newInstance() {
-        return new SettingFragment();
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.settings, rootKey);
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+    public boolean onPreferenceTreeClick(Preference preference) {
+        switch (preference.getKey()) {
+            case "about_author":
+                openLink(getString(R.string.settings_author_detail));
+                break;
+            case "about_repo":
+                openLink(getString(R.string.settings_repo_detail));
+                break;
+            case "license":
+                new LicensesDialog.Builder(getActivity()).setNotices(R.raw.notices).build().show();
+                break;
+            case "version":
+                openLink("https://github.com/reed-overflow/Saimin-APP/releases");
+                break;
+            default:
+                break;
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(SettingViewModel.class);
-        // TODO: Use the ViewModel
+    private void openLink(String link) {
+        Uri uri = Uri.parse(link);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
-
 }

@@ -4,4 +4,16 @@
     <string name="menu_home">主页</string>
     <string name="menu_switch">模式切换</string>
     <string name="menu_settings">设置</string>
+
+    <string name="settings_author">作者信息</string>
+    <string name="settings_author_detail" translatable="false">https://github.com/reed-overflow</string>
+
+    <string name="settings_repo">项目地址</string>
+    <string name="settings_repo_detail" translatable="false">https://github.com/reed-overflow/Saimin-APP</string>
+
+    <string name="settings_license">License</string>
+    <string name="settings_license_detail">开源许可</string>
+
+    <string name="settings_version">版本</string>
+    <string name="settings_version_name" translatable="false">0.0.1a</string>
 </resources>
