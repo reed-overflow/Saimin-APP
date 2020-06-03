@@ -11,7 +11,6 @@ import com.reedoverflow.saiminapp.R;
 
 import de.psdev.licensesdialog.LicensesDialog;
 
-// TODO: 2020/6/2 设置界面 
 public class SettingFragment extends PreferenceFragmentCompat {
 
     @Override

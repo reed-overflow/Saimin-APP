@@ -4,18 +4,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class BaiscViewModel extends ViewModel {
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> homeText;
 
     public BaiscViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is basic fragment");
+        homeText = new MutableLiveData<>();
     }
 
-    public MutableLiveData<String> getmText() {
-        return mText;
-    }
-
-    public void setmText(MutableLiveData<String> mText) {
-        this.mText = mText;
+    public MutableLiveData<String> getHomeText() {
+        return homeText;
     }
 }

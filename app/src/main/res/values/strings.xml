@@ -19,6 +19,11 @@
     <string name="settings_version">版本</string>
     <string name="settings_version_name" translatable="false">0.0.1a</string>
 
+    <string name="basic_saimin_stop">未启动</string>
+    <string name="basic_saimin_start">催眠中</string>
+    <string name="basic_saimin_starting">催眠服务启动中…</string>
+    <string name="basic_saimin_shutdown">催眠服务关闭中…</string>
+
     <string name="sensitive_sensitive">敏感度</string>
     <string name="sensitive_obey">服从度</string>
 </resources>
