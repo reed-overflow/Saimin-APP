@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_switch"
-        android:name="com.reedoverflow.saiminapp.ui.switchmode.SwitchFragment"
-        android:label="@string/menu_switch"
-        tools:layout="@layout/fragment_switch" />
-
-    <fragment
         android:id="@+id/nav_settings"
         android:name="com.reedoverflow.saiminapp.ui.settings.SettingFragment"
         android:label="@string/menu_settings"

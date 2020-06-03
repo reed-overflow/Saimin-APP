@@ -2,8 +2,10 @@
     <string name="app_name">Saimin APP</string>
 
     <string name="menu_home">主页</string>
-    <string name="menu_switch">模式切换</string>
     <string name="menu_settings">设置</string>
+
+    <string name="settings_switch">模式切换</string>
+    <string name="settings_switch_detail">切换应用模式</string>
 
     <string name="settings_author">作者信息</string>
     <string name="settings_author_detail" translatable="false">https://github.com/reed-overflow</string>
@@ -16,4 +18,7 @@
 
     <string name="settings_version">版本</string>
     <string name="settings_version_name" translatable="false">0.0.1a</string>
+
+    <string name="sensitive_sensitive">敏感度</string>
+    <string name="sensitive_obey">服从度</string>
 </resources>

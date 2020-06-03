@@ -1,4 +1,4 @@
-package com.reedoverflow.saiminapp.ui.home.basic;
+package com.reedoverflow.saiminapp.ui.home.basicmode;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

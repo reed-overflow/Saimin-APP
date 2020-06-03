@@ -1,4 +1,4 @@
-package com.reedoverflow.saiminapp.ui.home.basic;
+package com.reedoverflow.saiminapp.ui.home.basicmode;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

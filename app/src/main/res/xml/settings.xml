@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Preference
-        app:key="about_author"
-        app:summary="@string/settings_author_detail"
-        app:title="@string/settings_author" />
+    <PreferenceCategory
+        app:title="@string/menu_settings">
 
-    <Preference
-        app:key="about_repo"
-        app:summary="@string/settings_repo_detail"
-        app:title="@string/settings_repo" />
+        <ListPreference
+            app:key="switch"
+            app:icon="@drawable/ic_menu_switch"
+            app:summary="@string/settings_switch"
+            app:title="@string/settings_switch_detail"
+            app:entries="@array/mode_entries"
+            app:entryValues="@array/mode_values"
+            app:defaultValue="0"/>
 
-    <Preference
-        app:key="license"
-        app:summary="@string/settings_license_detail"
-        app:title="@string/settings_license" />
+        <Preference
+            app:key="about_author"
+            app:summary="@string/settings_author_detail"
+            app:title="@string/settings_author" />
 
-    <Preference
-        app:key="version"
-        app:summary="@string/settings_version_name"
-        app:title="@string/settings_version" />
+        <Preference
+            app:key="about_repo"
+            app:summary="@string/settings_repo_detail"
+            app:title="@string/settings_repo" />
+
+        <Preference
+            app:key="license"
+            app:summary="@string/settings_license_detail"
+            app:title="@string/settings_license" />
+
+        <Preference
+            app:key="version"
+            app:summary="@string/settings_version_name"
+            app:title="@string/settings_version" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
