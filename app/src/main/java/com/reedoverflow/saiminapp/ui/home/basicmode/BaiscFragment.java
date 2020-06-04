@@ -36,18 +36,17 @@ public class BaiscFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_baisc, container, false);
 
         final TextView homeText = root.findViewById(R.id.home_text);
+        rippleBackground = root.findViewById(R.id.ripple_bg);
+        homeSwitch = root.findViewById(R.id.home_switch);
+
         baiscViewModel.getHomeText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 homeText.setText(s);
             }
         });
-
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
 
-        rippleBackground = root.findViewById(R.id.ripple_bg);
-
-        homeSwitch = root.findViewById(R.id.home_switch);
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -68,7 +67,6 @@ public class BaiscFragment extends Fragment {
         baiscViewModel = ViewModelProviders.of(this).get(BaiscViewModel.class);
     }
 
-    // TODO: 2020/6/3 动画效果
     //临时模拟
     private void saiminStart() {
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_starting));
