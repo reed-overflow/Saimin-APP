@@ -14,4 +14,10 @@
         <license>Apache Software License 2.0</license>
     </notice>
 
+    <notice>
+        <name>android-ripple-background</name>
+        <url>https://github.com/skyfishjy/android-ripple-background</url>
+        <copyright>Copyright (c) 2014 Yao Yu</copyright>
+        <license>MIT License</license>
+    </notice>
 </notices>

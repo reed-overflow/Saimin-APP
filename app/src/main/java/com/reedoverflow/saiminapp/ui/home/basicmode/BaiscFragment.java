@@ -1,6 +1,7 @@
 package com.reedoverflow.saiminapp.ui.home.basicmode;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.reedoverflow.saiminapp.R;
+import com.reedoverflow.saiminapp.utils.RippleBackground;
 
 public class BaiscFragment extends Fragment {
 
     private BaiscViewModel baiscViewModel;
     private Switch homeSwitch;
+    private RippleBackground rippleBackground;
 
     public static BaiscFragment newInstance() {
         return new BaiscFragment();
@@ -41,6 +44,8 @@ public class BaiscFragment extends Fragment {
         });
 
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
+
+        rippleBackground = root.findViewById(R.id.ripple_bg);
 
         homeSwitch = root.findViewById(R.id.home_switch);
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -67,33 +72,32 @@ public class BaiscFragment extends Fragment {
     //临时模拟
     private void saiminStart() {
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_starting));
+        homeSwitch.setEnabled(false);
 
-        new Thread(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(2000);
-                    baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_start));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_start));
+                homeSwitch.setEnabled(true);
+
+                rippleBackground.startRippleAnimation();
             }
-        }).start();
+        }, 2000);
     }
+
     //临时模拟
     private void saiminStop() {
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_shutdown));
+        homeSwitch.setEnabled(false);
 
-        new Thread(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(1000);
-                    baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
+                homeSwitch.setEnabled(true);
+
+                rippleBackground.stopRippleAnimation();
             }
-        }).start();
+        }, 1000);
     }
 }

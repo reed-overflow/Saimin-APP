@@ -3,6 +3,6 @@
 
 ## TODO
 - [x] Mode switch 
-- [ ] Home page animation 
+- [x] Home page animation
 - [ ] Sensitive mode 
 - [ ] More mode

@@ -44,8 +44,6 @@ dependencies {
 
     implementation 'androidx.preference:preference:1.1.1'
 
-
 //    LicensesDialog
     implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
-
 }
