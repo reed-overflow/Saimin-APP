@@ -33,4 +33,17 @@
         <copyright>Copyright 2017 woxingxiao</copyright>
         <license>Apache Software License 2.0</license>
     </notice>
+
+    <notice>
+        <name>RippleAnimation</name>
+        <url>https://github.com/Ifxcyr/RippleAnimation</url>
+        <license>Apache Software License 2.0</license>
+    </notice>
+
+    <notice>
+        <name>Android-skin-support</name>
+        <url>https://github.com/ximsfei/Android-skin-support</url>
+        <copyright>Copyright (c) 2017 pengfeng wang</copyright>
+        <license>MIT License</license>
+    </notice>
 </notices>

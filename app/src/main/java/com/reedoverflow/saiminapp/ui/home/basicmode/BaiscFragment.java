@@ -17,6 +17,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.reedoverflow.saiminapp.R;
 import com.reedoverflow.saiminapp.utils.RippleBackground;
+import com.wuyr.rippleanimation.RippleAnimation;
+
+import skin.support.SkinCompatManager;
 
 public class BaiscFragment extends Fragment {
 
@@ -49,9 +52,14 @@ public class BaiscFragment extends Fragment {
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                RippleAnimation.create(root).setDuration(1000).start();
                 if (isChecked) {
+                    SkinCompatManager.getInstance().loadSkin("alter", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
+
                     saiminStart();
                 } else {
+                    SkinCompatManager.getInstance().restoreDefaultTheme();
+
                     saiminStop();
                 }
             }

@@ -7,4 +7,8 @@
 - [x] Sensitive mode
 - [x] Bubbleseekbar
 - [ ] Background visual effects improve
+- [ ] App intro
+- [ ] Check update
+- [ ] Shortcut
+- [ ] Notification
 - [ ] More mode

@@ -7,4 +7,8 @@
     <color name="rippelColor">#0099CC</color>
 
     <color name="white">#fff</color>
+    <color name="black">#000</color>
+
+    <color name="card_bg">@color/white</color>
+    <color name="card_text">@color/black</color>
 </resources>
