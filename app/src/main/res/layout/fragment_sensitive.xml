@@ -31,10 +31,10 @@
                 app:rb_strokeWidth="5dp"
                 app:rb_type="strokeRipple" />
 
-            <Switch
+            <com.kyleduo.switchbutton.SwitchButton
                 android:id="@+id/home_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

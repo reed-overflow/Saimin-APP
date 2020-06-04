@@ -20,4 +20,10 @@
         <copyright>Copyright (c) 2014 Yao Yu</copyright>
         <license>MIT License</license>
     </notice>
+
+    <notice>
+        <name>SwitchButton</name>
+        <url>https://github.com/kyleduo/SwitchButton</url>
+        <license>Apache Software License 2.0</license>
+    </notice>
 </notices>

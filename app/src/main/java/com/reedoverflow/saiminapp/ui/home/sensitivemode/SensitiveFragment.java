@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import com.kyleduo.switchbutton.SwitchButton;
 import com.reedoverflow.saiminapp.R;
 import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscFragment;
 import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscViewModel;
@@ -23,7 +23,7 @@ import com.reedoverflow.saiminapp.utils.RippleBackground;
 public class SensitiveFragment extends BaiscFragment {
 
     private BaiscViewModel baiscViewModel;
-    private Switch homeSwitch;
+    private SwitchButton homeSwitch;
     private RippleBackground rippleBackground;
 
     public static SensitiveFragment newInstance() {

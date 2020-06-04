@@ -6,23 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.kyleduo.switchbutton.SwitchButton;
 import com.reedoverflow.saiminapp.R;
 import com.reedoverflow.saiminapp.utils.RippleBackground;
 
 public class BaiscFragment extends Fragment {
 
     private BaiscViewModel baiscViewModel;
-    private Switch homeSwitch;
+    private SwitchButton homeSwitch;
     private RippleBackground rippleBackground;
 
     public static BaiscFragment newInstance() {
