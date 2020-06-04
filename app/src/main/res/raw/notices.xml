@@ -26,4 +26,11 @@
         <url>https://github.com/kyleduo/SwitchButton</url>
         <license>Apache Software License 2.0</license>
     </notice>
+
+    <notice>
+        <name>BubbleSeekBar</name>
+        <url>https://github.com/woxingxiao/BubbleSeekBar</url>
+        <copyright>Copyright 2017 woxingxiao</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
 </notices>

@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="4"
         android:layout_margin="10dp"
         android:elevation="30dp">
 
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:rb_color="@color/colorPrimaryDark"
-                app:rb_duration="3000"
+                app:rb_duration="5000"
                 app:rb_radius="60dp"
                 app:rb_rippleAmount="10"
                 app:rb_scale="15"
@@ -68,22 +68,33 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/sensitive_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 android:text="@string/sensitive_sensitive" />
 
-            <SeekBar
+            <com.xw.repo.BubbleSeekBar
                 android:id="@+id/sensitive_bar"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="20" />
+                app:bsb_bubble_color="@color/colorPrimary"
+                app:bsb_bubble_text_color="@color/colorAccent"
+                app:bsb_max="10"
+                app:bsb_min="0"
+                app:bsb_progress="3"
+                app:bsb_second_track_color="@color/colorPrimaryDark"
+                app:bsb_section_count="10"
+                app:bsb_section_text_position="bottom_sides"
+                app:bsb_show_progress_in_float="false"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_show_thumb_text="true"
+                app:bsb_track_color="@color/colorPrimary"
+                app:bsb_seek_step_section="true"/>
 
         </LinearLayout>
 
@@ -94,23 +105,34 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/sensitive_area">
 
             <TextView
                 android:id="@+id/obey_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 android:text="@string/sensitive_obey" />
 
-            <SeekBar
+            <com.xw.repo.BubbleSeekBar
                 android:id="@+id/obey_bar"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="50" />
+                app:bsb_bubble_color="@color/colorPrimary"
+                app:bsb_bubble_text_color="@color/white"
+                app:bsb_max="10"
+                app:bsb_min="0"
+                app:bsb_progress="5"
+                app:bsb_second_track_color="@color/colorPrimaryDark"
+                app:bsb_section_count="10"
+                app:bsb_section_text_position="bottom_sides"
+                app:bsb_show_progress_in_float="false"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_show_thumb_text="true"
+                app:bsb_track_color="@color/colorPrimary"
+                app:bsb_seek_step_section="true"/>
 
         </LinearLayout>
 
