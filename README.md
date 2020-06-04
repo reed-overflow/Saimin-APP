@@ -5,6 +5,6 @@
 - [x] Mode switch 
 - [x] Home page animation
 - [x] Sensitive mode
-- [ ] Bubbleseekbar
+- [x] Bubbleseekbar
 - [ ] Background visual effects improve
 - [ ] More mode
