@@ -4,5 +4,7 @@
 ## TODO
 - [x] Mode switch 
 - [x] Home page animation
-- [ ] Sensitive mode 
+- [x] Sensitive mode
+- [ ] Bubbleseekbar
+- [ ] Background visual effects improve
 - [ ] More mode

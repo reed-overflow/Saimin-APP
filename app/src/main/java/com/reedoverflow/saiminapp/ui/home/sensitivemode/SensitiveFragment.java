@@ -19,7 +19,6 @@ import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscFragment;
 import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscViewModel;
 import com.reedoverflow.saiminapp.utils.RippleBackground;
 
-// TODO: 2020/6/3 This 
 public class SensitiveFragment extends BaiscFragment {
 
     private BaiscViewModel baiscViewModel;
