@@ -8,8 +8,8 @@ android {
         applicationId "com.reedoverflow.saiminapp"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "0.0.1a"
+        versionCode 2
+        versionName "0.1.0b"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

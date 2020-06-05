@@ -17,7 +17,7 @@
     <string name="settings_license_detail">开源许可</string>
 
     <string name="settings_version">版本</string>
-    <string name="settings_version_name" translatable="false">0.0.1a</string>
+    <string name="settings_version_name" translatable="false">0.1.0b</string>
 
     <string name="basic_saimin_stop">未启动</string>
     <string name="basic_saimin_start">催眠中</string>
