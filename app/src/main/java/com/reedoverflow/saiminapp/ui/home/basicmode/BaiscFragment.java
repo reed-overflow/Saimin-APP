@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,8 +19,6 @@ import com.kyleduo.switchbutton.SwitchButton;
 import com.reedoverflow.saiminapp.R;
 import com.reedoverflow.saiminapp.utils.RippleBackground;
 import com.wuyr.rippleanimation.RippleAnimation;
-
-import skin.support.SkinCompatManager;
 
 public class BaiscFragment extends Fragment {
 
@@ -49,18 +48,19 @@ public class BaiscFragment extends Fragment {
         });
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
 
+        CardView cardView =root.findViewById(R.id.basic_card_view);
+
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                RippleAnimation.create(root).setDuration(1000).start();
-                if (isChecked) {
-                    SkinCompatManager.getInstance().loadSkin("alter", SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN); // 后缀加载
+                RippleAnimation.create(homeSwitch).setDuration(1000).start();
 
+                if (isChecked) {
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg_alter));
                     saiminStart();
                 } else {
-                    SkinCompatManager.getInstance().restoreDefaultTheme();
-
                     saiminStop();
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
                 }
             }
         });
@@ -94,14 +94,13 @@ public class BaiscFragment extends Fragment {
     private void saiminStop() {
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_shutdown));
         homeSwitch.setEnabled(false);
+        rippleBackground.stopRippleAnimation();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
                 homeSwitch.setEnabled(true);
-
-                rippleBackground.stopRippleAnimation();
             }
         }, 1000);
     }

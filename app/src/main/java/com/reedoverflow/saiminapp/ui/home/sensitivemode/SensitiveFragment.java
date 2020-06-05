@@ -3,6 +3,7 @@ package com.reedoverflow.saiminapp.ui.home.sensitivemode;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -18,6 +19,7 @@ import com.reedoverflow.saiminapp.R;
 import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscFragment;
 import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscViewModel;
 import com.reedoverflow.saiminapp.utils.RippleBackground;
+import com.wuyr.rippleanimation.RippleAnimation;
 
 public class SensitiveFragment extends BaiscFragment {
 
@@ -48,13 +50,20 @@ public class SensitiveFragment extends BaiscFragment {
         });
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
 
+        CardView cardView =root.findViewById(R.id.sensitive_card_view);
+
+
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                RippleAnimation.create(homeSwitch).setDuration(1000).start();
+
                 if (isChecked) {
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg_alter));
                     saiminStart();
                 } else {
                     saiminStop();
+                    cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
                 }
             }
         });
@@ -88,14 +97,13 @@ public class SensitiveFragment extends BaiscFragment {
     private void saiminStop() {
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_shutdown));
         homeSwitch.setEnabled(false);
+        rippleBackground.stopRippleAnimation();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
                 homeSwitch.setEnabled(true);
-
-                rippleBackground.stopRippleAnimation();
             }
         }, 1000);
     }
