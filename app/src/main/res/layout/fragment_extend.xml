@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.sensitivemode.SensitiveFragment">
+    tools:context=".ui.home.extendmode.ExtendFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/sensitive_card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="1"
         android:layout_margin="10dp"
         android:elevation="30dp"
         app:cardBackgroundColor="@color/card_bg">
@@ -47,8 +47,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="150dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -76,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text="@string/sensitive_sensitive" />
+                android:text="@string/extend_sensitive" />
 
             <com.xw.repo.BubbleSeekBar
                 android:id="@+id/sensitive_bar"
@@ -114,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text="@string/sensitive_obey" />
+                android:text="@string/extend_obey" />
 
             <com.xw.repo.BubbleSeekBar
                 android:id="@+id/obey_bar"

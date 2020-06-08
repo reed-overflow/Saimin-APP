@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager;
 
 import com.reedoverflow.saiminapp.R;
 import com.reedoverflow.saiminapp.ui.home.basicmode.BaiscFragment;
-import com.reedoverflow.saiminapp.ui.home.sensitivemode.SensitiveFragment;
+import com.reedoverflow.saiminapp.ui.home.extendmode.ExtendFragment;
 
 import java.util.Objects;
 
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
                 break;
             }
             case 1: {
-                toFragment(SensitiveFragment.newInstance());
+                toFragment(ExtendFragment.newInstance());
                 break;
             }
         }

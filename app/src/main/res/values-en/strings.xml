@@ -21,6 +21,6 @@
     <string name="basic_saimin_starting">Saimin service starting…</string>
     <string name="basic_saimin_shutdown">Shutdown Saimin service…</string>
 
-    <string name="sensitive_sensitive">Sensitive</string>
-    <string name="sensitive_obey">Obey</string>
+    <string name="extend_sensitive">Sensitive</string>
+    <string name="extend_obey">Obey</string>
 </resources>

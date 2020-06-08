@@ -1,6 +1,6 @@
 <resources>
     <string-array name="mode_entries">
         <item>"Basic mode"</item>
-        <item>"Sensitive mode"</item>
+        <item>"Extend mode"</item>
     </string-array>
 </resources>

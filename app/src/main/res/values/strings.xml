@@ -24,6 +24,6 @@
     <string name="basic_saimin_starting">催眠服务启动中…</string>
     <string name="basic_saimin_shutdown">催眠服务关闭中…</string>
 
-    <string name="sensitive_sensitive">敏感度</string>
-    <string name="sensitive_obey">服从度</string>
+    <string name="extend_sensitive">敏感度</string>
+    <string name="extend_obey">服从度</string>
 </resources>

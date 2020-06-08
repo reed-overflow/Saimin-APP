@@ -25,6 +25,7 @@ public class BaiscFragment extends Fragment {
     private BaiscViewModel baiscViewModel;
     private SwitchButton homeSwitch;
     private RippleBackground rippleBackground;
+    private CardView cardView;
 
     public static BaiscFragment newInstance() {
         return new BaiscFragment();
@@ -48,17 +49,16 @@ public class BaiscFragment extends Fragment {
         });
         baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_stop));
 
-        CardView cardView =root.findViewById(R.id.basic_card_view);
+        cardView = root.findViewById(R.id.basic_card_view);
 
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                RippleAnimation.create(homeSwitch).setDuration(1000).start();
 
                 if (isChecked) {
-                    cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg_alter));
                     saiminStart();
                 } else {
+                    RippleAnimation.create(homeSwitch).setDuration(1000).start();
                     saiminStop();
                     cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
                 }
@@ -82,6 +82,9 @@ public class BaiscFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                RippleAnimation.create(homeSwitch).setDuration(3000).start();
+                cardView.setCardBackgroundColor(getResources().getColor(R.color.card_bg_alter));
+
                 baiscViewModel.getHomeText().postValue(getString(R.string.basic_saimin_start));
                 homeSwitch.setEnabled(true);
 
