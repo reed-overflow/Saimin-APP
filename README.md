@@ -12,8 +12,16 @@ A hentai style saimin app you are looking for.
 - [x] Sensitive mode
 - [x] Bubbleseekbar
 - [x] Background visual effects improve
-- [ ] App intro
+- [ ] Custom mode
 - [ ] Check update
+- [ ] App intro
 - [ ] Shortcut
 - [ ] Notification
 - [ ] More mode
+
+## Thanks
+- [LicensesDialog](https://github.com/PSDev/LicensesDialog)
+- [android-ripple-background](https://github.com/skyfishjy/android-ripple-background)
+- [SwitchButton](https://github.com/kyleduo/SwitchButton)
+- [BubbleSeekBar](https://github.com/woxingxiao/BubbleSeekBar)
+- [RippleAnimation](https://github.com/Ifxcyr/RippleAnimation)
