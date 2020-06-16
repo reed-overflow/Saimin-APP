@@ -4,7 +4,7 @@
 A hentai style saimin app you are looking for.
 
 ## 应用截图 Screenshot 
-![screenshot](art/Screenshot_1.png)
+![screenshot](https://cdn.jsdelivr.net/gh/reed-overflow/Saimin-APP/art/Screenshot_1.png)
 
 ## TODO
 - [x] Mode switch 
