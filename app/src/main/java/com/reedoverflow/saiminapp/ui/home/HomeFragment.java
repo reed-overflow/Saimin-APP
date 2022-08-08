@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
 
     private void checkMode() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireActivity());
-        int option = Integer.parseInt(Objects.requireNonNull(preferences.getString("switch", "0")));
+        int option = preferences.getInt("switch", 1);
 
         switch (option) {
             case 0: {
@@ -42,6 +42,10 @@ public class HomeFragment extends Fragment {
                 break;
             }
             case 1: {
+                toFragment(ExtendFragment.newInstance());
+                break;
+            }
+            default:{
                 toFragment(ExtendFragment.newInstance());
                 break;
             }
