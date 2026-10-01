@@ -1,0 +1,6 @@
+<androidx.appcompat.widget.AppCompatSeekBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="48dp"
+    android:minHeight="3dp" android:maxHeight="3dp" android:paddingLeft="8dp" android:paddingRight="8dp"
+    android:thumb="@drawable/slider_thumb" android:progressDrawable="@drawable/slider_track"
+    android:splitTrack="false" android:saveEnabled="false"
+    android:thumbTint="@null" android:progressTint="@null" android:progressBackgroundTint="@null" />

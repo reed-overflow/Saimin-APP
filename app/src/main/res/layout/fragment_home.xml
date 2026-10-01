@@ -1,14 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+﻿<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
-
-    <FrameLayout
-        android:id="@+id/fragment_cont"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:background="#FFFBFC" android:clipToPadding="false">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="24dp">
+        <TextView android:visibility="gone" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/current_mode" android:textColor="#947D86" android:textSize="12sp" />
+        <TextView android:visibility="gone" android:id="@+id/mode_title" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="6dp"
+            android:textColor="#412D36" android:textSize="26sp" android:fontFamily="sans-serif-medium" />
+        <androidx.cardview.widget.CardView android:id="@+id/animation_card"
+            android:layout_width="match_parent" android:layout_height="280dp" android:layout_marginTop="4dp"
+            app:cardCornerRadius="24dp" app:cardElevation="0dp" app:cardBackgroundColor="#FFF0F5">
+            <com.reedoverflow.saiminapp.ui.home.HypnosisAnimationView android:id="@+id/custom_animation"
+                android:layout_width="match_parent" android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.SwitchCompat android:id="@+id/play_switch"
+            android:layout_width="match_parent" android:layout_height="64dp" android:layout_marginTop="8dp"
+            android:saveEnabled="false" android:text="@string/basic_saimin_stop"
+            android:textColor="#715A65" android:textSize="15sp"
+            android:thumb="@drawable/switch_thumb" app:track="@drawable/switch_track"
+            app:trackTint="@color/switch_track" app:thumbTint="#FFFFFF"
+            app:switchMinWidth="52dp" app:showText="false" app:splitTrack="false" />
+        <LinearLayout android:id="@+id/custom_parameters" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="12dp" />
+        <androidx.appcompat.widget.AppCompatButton android:id="@+id/reset_parameters"
+            style="@style/SoftButton" android:layout_width="wrap_content" android:layout_height="48dp"
+            android:layout_gravity="center_horizontal" android:layout_marginTop="24dp"
+            android:text="@string/reset_parameters" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
