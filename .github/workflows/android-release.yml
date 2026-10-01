@@ -7,55 +7,36 @@ on:
 
   workflow_dispatch:
 
-
 permissions:
   contents: write
-
 
 concurrency:
   group: main-apk-draft
   cancel-in-progress: false
 
-
-
 jobs:
-
   build:
-
     if: github.ref == 'refs/heads/main'
-
     runs-on: ubuntu-latest
-
     timeout-minutes: 30
 
-
     steps:
-
-
       - name: Checkout
         uses: actions/checkout@v4
-
-
 
       # AGP 7.4.2 推荐 JDK 17
       - name: Setup Java
         uses: actions/setup-java@v4
-
         with:
           distribution: temurin
           java-version: "17"
-
-
 
       # 不要使用 packages 参数
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-
-
       - name: Install Android SDK packages
         run: |
-
           yes | sdkmanager --licenses
 
           sdkmanager \
@@ -63,95 +44,56 @@ jobs:
             "platforms;android-33" \
             "build-tools;33.0.0"
 
-
-
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-
-
 
       # =========================
       # Signing
       # =========================
 
       - name: Prepare signing
-
         env:
-
           KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-
           STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-
           KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-
         run: |
-
-
           if [[ -n "$KEYSTORE_BASE64" ]]; then
 
-
             if [[ -z "$STORE_PASSWORD" || -z "$KEY_ALIAS" || -z "$KEY_PASSWORD" ]]; then
-
               echo "Incomplete Android signing secrets"
-
               exit 1
-
             fi
-
 
             printf '%s' "$KEYSTORE_BASE64" \
               | base64 --decode \
               > "$RUNNER_TEMP/release.jks"
 
-
-
             echo "RELEASE_KEYSTORE_PATH=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
-
             echo "SIGNING_LABEL=Release key" >> "$GITHUB_ENV"
-
-
 
           else
 
-
             echo "CI_TEST_SIGNING=true" >> "$GITHUB_ENV"
-
             echo "SIGNING_LABEL=Debug key" >> "$GITHUB_ENV"
 
-
           fi
-
-
-
 
       # =========================
       # Build
       # =========================
 
-
-      - name="Build APK"
-
+      - name: Build APK
         env:
-
           RELEASE_KEYSTORE_PATH: ${{ env.RELEASE_KEYSTORE_PATH }}
-
           RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-
           RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-
           RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-
           CI_TEST_SIGNING: ${{ env.CI_TEST_SIGNING }}
 
-
         run: |
-
-
           chmod +x ./gradlew
-
 
           ./gradlew \
             --no-daemon \
@@ -159,69 +101,49 @@ jobs:
             lintDebug \
             assembleRelease
 
-
-
-
       - name: Prepare release asset
-
         id: apk
 
-
         run: |
-
-
           python3 <<'PY'
-
           import json
           import os
           import pathlib
           import shutil
 
-
           directory = pathlib.Path(
               "app/build/outputs/apk/release"
           )
-
 
           metadata = json.loads(
               (directory / "output-metadata.json")
               .read_text()
           )
 
-
           apk = metadata["elements"][0]
 
-
           version = apk["versionName"]
-
           code = apk["versionCode"]
 
-
           tag = f"v{version}-main.{os.environ['GITHUB_RUN_NUMBER']}"
-
 
           dest = pathlib.Path(
               "dist"
           ) / f"Saimin-{tag}.apk"
 
-
-
           dest.parent.mkdir(
               exist_ok=True
           )
-
 
           shutil.copy2(
               directory / apk["outputFile"],
               dest
           )
 
-
           with open(
               os.environ["GITHUB_OUTPUT"],
               "a"
           ) as f:
-
               f.write(
                   f"tag={tag}\n"
               )
@@ -230,13 +152,10 @@ jobs:
                   f"asset={dest}\n"
               )
 
-
-
           pathlib.Path(
               "release-notes.md"
           ).write_text(
-
-              f"""
+              f"""\
 Main branch build
 
 Version:
@@ -251,57 +170,32 @@ Commit:
 Signing:
 {os.environ['SIGNING_LABEL']}
 """,
-
               encoding="utf-8"
-
           )
 
           PY
 
-
-
       - name: Verify APK signature
-
         run: |
-
           "$ANDROID_HOME/build-tools/33.0.0/apksigner" \
             verify \
             --verbose \
             dist/*.apk
 
-
-
-
-
       - name: Upload APK artifact
-
         uses: actions/upload-artifact@v4
-
         with:
-
           name: main-apk
-
           path: dist/*.apk
 
-
-
-
       - name: Create draft release
-
         env:
-
           GH_TOKEN: ${{ github.token }}
-
           GH_REPO: ${{ github.repository }}
-
           TAG: ${{ steps.apk.outputs.tag }}
-
           ASSET: ${{ steps.apk.outputs.asset }}
 
-
         run: |
-
-
           gh release create "$TAG" \
             "$ASSET" \
             --draft \
@@ -309,13 +203,8 @@ Signing:
             --title "Saimin $TAG" \
             --notes-file release-notes.md
 
-
-
-
       - name: Remove signing material
-
         if: always()
 
         run: |
-
           rm -f "$RUNNER_TEMP/release.jks"
