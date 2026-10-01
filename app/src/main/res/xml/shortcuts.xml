@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="home" android:enabled="true"
+        android:icon="@drawable/ic_menu_home" android:shortcutShortLabel="@string/shortcut_home">
+        <intent android:action="com.reedoverflow.saiminapp.OPEN_HOME"
+            android:targetPackage="com.reedoverflow.saiminapp"
+            android:targetClass="com.reedoverflow.saiminapp.MainActivity" />
+    </shortcut>
+    <shortcut android:shortcutId="settings" android:enabled="true"
+        android:icon="@drawable/ic_menu_settings" android:shortcutShortLabel="@string/shortcut_settings">
+        <intent android:action="com.reedoverflow.saiminapp.OPEN_SETTINGS"
+            android:targetPackage="com.reedoverflow.saiminapp"
+            android:targetClass="com.reedoverflow.saiminapp.MainActivity" />
+    </shortcut>
+</shortcuts>

@@ -17,4 +17,11 @@
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_setting" />
 
+    <fragment
+        android:id="@+id/nav_mode_editor"
+        android:name="com.reedoverflow.saiminapp.ui.settings.ModeEditorFragment"
+        android:label="@string/edit_mode">
+        <argument android:name="mode_id" app:argType="string" />
+    </fragment>
+
 </navigation>

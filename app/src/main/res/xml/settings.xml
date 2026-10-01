@@ -2,16 +2,33 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:title="@string/menu_settings">
+        app:title="@string/modes_title">
 
         <ListPreference
-            app:key="switch"
+            app:key="current_mode"
             app:icon="@drawable/ic_menu_switch"
-            app:summary="@string/settings_switch"
-            app:title="@string/settings_switch_detail"
-            app:entries="@array/mode_entries"
-            app:entryValues="@array/mode_values"
-            app:defaultValue="0"/>
+            app:persistent="false"
+            app:title="@string/current_mode" />
+
+        <Preference
+            app:key="add_mode"
+            app:title="@string/add_mode"
+            app:summary="@string/add_mode_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="mode_list"
+        app:title="@string/edit_modes" />
+
+    <PreferenceCategory app:title="@string/tools_title">
+        <Preference app:key="intro" app:title="@string/intro_title" app:summary="@string/intro_summary" />
+        <SwitchPreferenceCompat app:key="notification_entry" app:defaultValue="false"
+            app:title="@string/notification_entry" app:summary="@string/notification_entry_summary" />
+        <Preference app:key="notification_settings" app:title="@string/notification_settings" />
+        <Preference app:key="check_updates" app:title="@string/check_updates" app:summary="@string/check_updates_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/about_app">
 
         <Preference
             app:key="about_author"
