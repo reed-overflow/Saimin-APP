@@ -31,10 +31,6 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      # 不要使用 packages 参数
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
