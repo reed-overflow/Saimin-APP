@@ -85,10 +85,10 @@ public class UpdateCheckDialog extends DialogFragment {
             if (!cancelled) main.post(() -> {
                 if (cancelled || !isAdded() || getDialog() != dialog) return;
                 if (message == R.string.update_available) {
-                    dialog.setTitle(getString(message, tag));
+                    dialog.setTitle(getString(R.string.update_available, tag));
                     dialog.setMessage(getString(R.string.update_current, BuildConfig.VERSION_NAME, tag));
-                } else if (message == R.string.update_unknown_version) dialog.setMessage(getString(message, tag));
-                else if (message == R.string.update_latest) dialog.setMessage(getString(message, BuildConfig.VERSION_NAME));
+                } else if (message == R.string.update_unknown_version) dialog.setMessage(getString(R.string.update_unknown_version, tag));
+                else if (message == R.string.update_latest) dialog.setMessage(getString(R.string.update_latest, BuildConfig.VERSION_NAME));
                 else dialog.setMessage(getString(message));
             });
         });

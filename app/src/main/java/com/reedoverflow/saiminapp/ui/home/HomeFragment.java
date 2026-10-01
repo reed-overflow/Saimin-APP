@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         animation = view.findViewById(R.id.custom_animation);
         playSwitch = view.findViewById(R.id.play_switch);
         playSwitch.setOnCheckedChangeListener((button, checked) -> {
-            playSwitch.setText(checked ? R.string.basic_saimin_start : R.string.basic_saimin_stop);
+            playSwitch.setContentDescription(getString(checked ? R.string.basic_saimin_start : R.string.basic_saimin_stop));
             if (checked && mode != null) {
                 if (mode.fullscreen) {
                     if (getChildFragmentManager().findFragmentByTag("fullscreen") == null) {

@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.reedoverflow.saiminapp.data.ModeConfig;
 
-/** Size is relative to the shorter side, including in landscape and fullscreen. */
+/** Ripples fill the viewport; their size setting controls the spacing between rings. */
 public class HypnosisAnimationView extends View {
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Path spiral = new Path();
@@ -97,17 +97,18 @@ public class HypnosisAnimationView extends View {
             paint.setStyle(Paint.Style.FILL);
             canvas.drawCircle(x, y, radius * 0.16f, paint);
         } else {
-            // Original RippleBackground: ten staggered rings, scale 1 to 15,
-            // with AccelerateDecelerateInterpolator on both scale and opacity.
-            for (int i = 0; i < 10; i++) {
-                long age = elapsed - i * durationMs / 10L;
+            // Keep every ring visible until even its inner edge has passed the corners.
+            // Linear motion and staggered births produce a continuous outward wave train.
+            float stroke = 3 * density;
+            float endRadius = (float) Math.hypot(getWidth() / 2f, getHeight() / 2f) + stroke;
+            int ringCount = (int) Math.ceil(1000f / Math.max(10, sizePercent));
+            paint.setStrokeWidth(stroke);
+            for (int i = 0; i < ringCount; i++) {
+                double age = elapsed - i * durationMs / (double) ringCount;
                 if (age < 0) continue;
-                float position = (age % durationMs) / (float) durationMs;
-                float eased = (1 - (float) Math.cos(Math.PI * position)) / 2;
-                float scale = 1 + 14 * eased;
-                float ringRadius = radius * scale / 15;
-                paint.setStrokeWidth(Math.max(density, ringRadius / 12));
-                paint.setAlpha((int) ((1 - eased) * 255));
+                float position = (float) ((age % durationMs) / durationMs);
+                float ringRadius = endRadius * position;
+                paint.setAlpha((int) (255 * Math.min(1f, ringRadius / (12 * density))));
                 canvas.drawCircle(getWidth() / 2f, getHeight() / 2f, ringRadius, paint);
             }
         }

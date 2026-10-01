@@ -43,7 +43,7 @@ public class FullscreenAnimationDialog extends DialogFragment {
         content.addView(animation, new FrameLayout.LayoutParams(-1, -1));
         androidx.appcompat.widget.AppCompatButton exit = new androidx.appcompat.widget.AppCompatButton(requireContext());
         exit.setBackgroundResource(R.drawable.soft_button);
-        exit.setSupportBackgroundTintList(null);
+        androidx.core.view.ViewCompat.setBackgroundTintList(exit, null);
         exit.setTextColor(Color.parseColor("#A34B6D"));
         exit.setAllCaps(false);
         exit.setTextSize(13);

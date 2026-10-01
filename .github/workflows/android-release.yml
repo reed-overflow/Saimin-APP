@@ -1,0 +1,103 @@
+name: Main APK draft
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-apk-draft
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install Android SDK
+        run: sdkmanager 'platforms;android-33' 'build-tools;33.0.0'
+      - name: Prepare signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [[ -n "$KEYSTORE_BASE64" ]]; then
+            if [[ -z "$STORE_PASSWORD" || -z "$KEY_ALIAS" || -z "$KEY_PASSWORD" ]]; then
+              echo 'Incomplete Android signing secrets' >&2
+              exit 1
+            fi
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
+            echo "RELEASE_KEYSTORE_PATH=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+            echo "SIGNING_LABEL=Release key" >> "$GITHUB_ENV"
+          else
+            if [[ -n "$STORE_PASSWORD$KEY_ALIAS$KEY_PASSWORD" ]]; then
+              echo 'Incomplete Android signing secrets' >&2
+              exit 1
+            fi
+            echo 'CI_TEST_SIGNING=true' >> "$GITHUB_ENV"
+            echo 'SIGNING_LABEL=Test key (configure Android signing secrets for stable upgrade signing)' >> "$GITHUB_ENV"
+          fi
+      - name: Check and build APK
+        env:
+          RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: bash ./gradlew --no-daemon testDebugUnitTest lintDebug assembleRelease
+      - name: Prepare release asset
+        id: apk
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, shutil
+          directory = pathlib.Path('app/build/outputs/apk/release')
+          metadata = json.loads((directory / 'output-metadata.json').read_text())
+          apk, = metadata['elements']
+          version = apk['versionName']
+          code = apk['versionCode']
+          tag = f"v{version}-main.{os.environ['GITHUB_RUN_NUMBER']}"
+          destination = pathlib.Path('dist') / f'Saimin-{tag}.apk'
+          destination.parent.mkdir(exist_ok=True)
+          shutil.copy2(directory / apk['outputFile'], destination)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'tag={tag}\nasset={destination}\n')
+          pathlib.Path('release-notes.md').write_text(
+              f'Main branch build: {version} (versionCode {code})\n\n'
+              f"Commit: {os.environ['GITHUB_SHA']}\n\n"
+              f"Signing: {os.environ['SIGNING_LABEL']}\n\n"
+              'Automatically built APK. Review this draft before publishing.\n', encoding='utf-8')
+          PY
+          "$ANDROID_HOME/build-tools/33.0.0/apksigner" verify --verbose dist/*.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: main-apk
+          path: dist/*.apk
+          if-no-files-found: error
+      - name: Create or update draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.apk.outputs.tag }}
+          ASSET: ${{ steps.apk.outputs.asset }}
+        run: |
+          if gh release view "$TAG" --json isDraft > "$RUNNER_TEMP/release.json" 2>/dev/null; then
+            python3 -c 'import json,sys; sys.exit(0 if json.load(open(sys.argv[1]))["isDraft"] else 1)' "$RUNNER_TEMP/release.json"
+            gh release upload "$TAG" "$ASSET" --clobber
+          else
+            gh release create "$TAG" "$ASSET" --draft --target "$GITHUB_SHA" \
+              --title "Saimin $TAG" --notes-file release-notes.md
+          fi
+      - name: Remove signing material
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks"
