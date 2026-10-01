@@ -103,60 +103,40 @@ jobs:
 
       - name: Prepare release asset
         id: apk
-
         run: |
-          python3 <<'PY'
+          python3 - <<'PY'
           import json
           import os
           import pathlib
           import shutil
 
-          directory = pathlib.Path(
-              "app/build/outputs/apk/release"
-          )
+          directory = pathlib.Path("app/build/outputs/apk/release")
 
           metadata = json.loads(
-              (directory / "output-metadata.json")
-              .read_text()
+              (directory / "output-metadata.json").read_text()
           )
 
           apk = metadata["elements"][0]
 
-          version = apk["versionName"]
-          code = apk["versionCode"]
+          version = apk.get("versionName", "0.0.0")
+          code = apk.get("versionCode", "0")
 
           tag = f"v{version}-main.{os.environ['GITHUB_RUN_NUMBER']}"
 
-          dest = pathlib.Path(
-              "dist"
-          ) / f"Saimin-{tag}.apk"
-
-          dest.parent.mkdir(
-              exist_ok=True
-          )
+          dest = pathlib.Path("dist") / f"Saimin-{tag}.apk"
+          dest.parent.mkdir(exist_ok=True)
 
           shutil.copy2(
               directory / apk["outputFile"],
               dest
           )
 
-          with open(
-              os.environ["GITHUB_OUTPUT"],
-              "a"
-          ) as f:
-              f.write(
-                  f"tag={tag}\n"
-              )
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"tag={tag}\n")
+              f.write(f"asset={dest}\n")
 
-              f.write(
-                  f"asset={dest}\n"
-              )
-
-          pathlib.Path(
-              "release-notes.md"
-          ).write_text(
-              f"""\
-Main branch build
+          pathlib.Path("release-notes.md").write_text(
+              f"""Main branch build
 
 Version:
 {version}
