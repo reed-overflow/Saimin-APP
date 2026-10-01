@@ -109,6 +109,7 @@ jobs:
           import os
           import pathlib
           import shutil
+          import textwrap
 
           directory = pathlib.Path("app/build/outputs/apk/release")
 
@@ -136,20 +137,23 @@ jobs:
               f.write(f"asset={dest}\n")
 
           pathlib.Path("release-notes.md").write_text(
-              f"""Main branch build
+              textwrap.dedent(
+                  f"""\
+                  Main branch build
 
-Version:
-{version}
+                  Version:
+                  {version}
 
-Version Code:
-{code}
+                  Version Code:
+                  {code}
 
-Commit:
-{os.environ['GITHUB_SHA']}
+                  Commit:
+                  {os.environ['GITHUB_SHA']}
 
-Signing:
-{os.environ['SIGNING_LABEL']}
-""",
+                  Signing:
+                  {os.environ['SIGNING_LABEL']}
+                  """
+              ).strip(),
               encoding="utf-8"
           )
 
